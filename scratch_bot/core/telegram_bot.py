@@ -12,7 +12,6 @@ API_KEY = os.getenv("telegram_bot_address")
 # create a new Telegram Bot
 bot = telebot.TeleBot(token=TOKEN)
 
-
 # command description used in the "help" command
 commands = {
     "start": "Начать работу с ботом",
@@ -29,6 +28,11 @@ def command_help(message):
     for key in commands:
         help_text += f"/{key}: {commands[key]}\n"
     bot.send_message(chat_id=chat_id, text=help_text)
+
+
+@bot.message_handler(content_types=["text"])
+def get_text_messages(message):
+    bot.reply_to(message, "К сожалению, я не для общения 😐")
 
 
 @bot.message_handler(commands=["start"])
