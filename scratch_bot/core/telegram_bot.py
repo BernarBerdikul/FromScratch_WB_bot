@@ -30,11 +30,6 @@ def command_help(message):
     bot.send_message(chat_id=chat_id, text=help_text)
 
 
-@bot.message_handler(content_types=["text"])
-def get_text_messages(message):
-    bot.reply_to(message, "К сожалению, я не для общения 😐")
-
-
 @bot.message_handler(commands=["start"])
 def send_welcome(message):
     create_guest(message)
@@ -72,3 +67,8 @@ def callback_query(call):
         text: str = "Нам жаль, кажется этот тариф не доступен :("
     bot.delete_message(chat_id=chat_id, message_id=call.message.id)
     bot.send_message(chat_id=chat_id, text=text)
+
+
+@bot.message_handler(content_types=["text"])
+def get_text_messages(message):
+    bot.reply_to(message, "К сожалению, я не для общения 😐")
