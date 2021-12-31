@@ -1,7 +1,7 @@
-import requests.exceptions
 from django.core.management.base import BaseCommand
 
 from ...telegram_bot import bot
+import time
 
 
 class Command(BaseCommand):
@@ -11,7 +11,14 @@ class Command(BaseCommand):
         """run telegram bot"""
         while True:
             try:
+                # bot work
+                print("bot work")
                 bot.polling()
-            except requests.exceptions.ReadTimeout:
+            except Exception:
+                # repeat connection
                 print("repeat connection")
+                time.sleep(3)
                 continue
+            finally:
+                print("bot close")
+                bot.close()
