@@ -1,0 +1,11 @@
+
+services:
+  bot:
+    container_name: bot
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - ./static:/usr/src/app/static
+    ports:
+      - "8000:8000"
