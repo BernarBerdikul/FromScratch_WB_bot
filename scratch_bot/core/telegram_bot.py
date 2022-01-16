@@ -32,22 +32,26 @@ def command_help(message):
 
 @bot.message_handler(commands=["start"])
 def send_welcome(message):
+    chat_id: int = message.chat.id
     create_guest(message)
-    tariffs = (
-        Tariff.objects.only("title", "position", "price")
-        .filter(enable=True)
-        .order_by("position")
-    )
-    markup = types.InlineKeyboardMarkup()
-    for tariff in tariffs:
-        test_text: str = f"{tariff.position} {tariff.title} ({tariff.price} рублей)"
-        markup.add(types.InlineKeyboardButton(text=test_text, callback_data=tariff.id))
-    bot.send_message(
-        chat_id=message.chat.id,
-        text="Благодарим что вы заинтересованы в приобретении нашего "
-        "уникального обучения. Выберите удобный для вас формат обучения",
-        reply_markup=markup,
-    )
+    try:
+        tariffs = (
+            Tariff.objects.only("title", "position", "price")
+            .filter(enable=True)
+            .order_by("position")
+        )
+        markup = types.InlineKeyboardMarkup()
+        for tariff in tariffs:
+            test_text: str = f"{tariff.position} {tariff.title} ({tariff.price} рублей)"
+            markup.add(types.InlineKeyboardButton(text=test_text, callback_data=tariff.id))
+        bot.send_message(
+            chat_id=chat_id,
+            text="Благодарим что вы заинтересованы в приобретении нашего "
+            "уникального обучения. Выберите удобный для вас формат обучения",
+            reply_markup=markup,
+        )
+    except Exception:
+        bot.send_message(chat_id=chat_id, text="Простите, бот пока не работает")
 
 
 @bot.callback_query_handler(func=lambda call: True)
