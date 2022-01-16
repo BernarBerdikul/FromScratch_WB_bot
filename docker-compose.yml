@@ -1,12 +1,25 @@
 version: "3"
 
 services:
+  db:
+    image: postgres:12.4
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./.env
+
   tm_bot:
     container_name: tm_bot
     build:
       context: ./
       dockerfile: Dockerfile
+    restart: always
     volumes:
       - ./static:/usr/src/app/static
     ports:
       - "8000:8000"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
