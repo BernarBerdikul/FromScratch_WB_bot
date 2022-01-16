@@ -1,7 +1,8 @@
+import time
+
 from django.core.management.base import BaseCommand
 
 from ...telegram_bot import bot
-import time
 
 
 class Command(BaseCommand):
