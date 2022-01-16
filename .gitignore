@@ -55,6 +55,7 @@ CRMP/api/db.sqlite3
 
 # Media files
 media/
+static/
 # django/media
 .idea/
 .vscode/

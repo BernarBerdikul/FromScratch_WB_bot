@@ -1,7 +1,8 @@
+version: "3"
 
 services:
-  bot:
-    container_name: bot
+  tm_bot:
+    container_name: tm_bot
     build:
       context: ./
       dockerfile: Dockerfile
