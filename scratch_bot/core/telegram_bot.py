@@ -65,7 +65,7 @@ def callback_query(call):
             f"{tariff.description}\n\n"
             f"Цена: {tariff.price} рублей\n\n"
             f"для продолжения, пройдите по ссылке: "
-            f"https://fromscratch.ru/oplata3.html"
+            f"{tariff.link}"
         )
     else:
         text: str = "Нам жаль, кажется этот тариф не доступен :("

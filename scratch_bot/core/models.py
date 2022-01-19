@@ -11,6 +11,10 @@ class Tariff(UpdateTimestampMixin):
     price = models.PositiveIntegerField(verbose_name="Цена тарифа")
     position = models.PositiveIntegerField(unique=True, verbose_name="Позиция в списке")
     enable = models.BooleanField(default=True, verbose_name="Активен")
+    link = models.URLField(
+        default="https://fromscratch.ru/oplata3.html",
+        verbose_name="Ссылка на оплату"
+    )
 
     class Meta:
         db_table = "tariff"
